@@ -33,4 +33,24 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function appointments(){
+        return $this->hasOne(Appointments::class, 'user_id');
+    }
+
+    public function trades(){
+        return $this->hasOne(Trades::class, 'user_id');
+    }
+
+    public function autodetailings(){
+        return $this->hasOne(AutoDetailing::class, 'user_id');
+    }
+
+    public function carwashes(){
+        return $this->hasOne(CarWashes::class, 'user_id');
+    }
+
+    public function paintjobs(){
+        return $this->hasOne(PaintJob::class, 'user_id');
+    }
+
 }

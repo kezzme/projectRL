@@ -1,9 +1,16 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TradeController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AppointmentController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,77 +39,107 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// /*--------------------------------Dashboard--------------------------------*/
-Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+// // /*--------------------------------Dashboard--------------------------------*/
+// Route::view('/dashboard', 'system.dashboard')->name('dashboard');
 
-// /*--------------------------------Inventory--------------------------------*/
-Route::view('/add-unit', 'admin.inv-addunit')->name('add-unit');
-Route::view('/showroom', 'admin.inv-showroom')->name('showroom');
-Route::view('/sold-units', 'admin.inv-soldunits')->name('sold-units');
+// // /*--------------------------------Inventory--------------------------------*/
+// Route::view('/add-unit', 'system.inv-addunit')->name('add-unit');
+// Route::view('/showroom', 'system.inv-showroom')->name('showroom');
+// Route::view('/sold-units', 'system.inv-soldunits')->name('sold-units');
 
-// /*--------------------------------Calendar--------------------------------*/
-Route::view('/calendar', 'admin.calendar')->name('calendar');
+// // /*--------------------------------Calendar--------------------------------*/
+// Route::view('/calendar', 'system.calendar')->name('calendar');
 
-// /*--------------------------------Appointment--------------------------------*/
-Route::view('/appointment', 'admin.appointment')->name('appointment');
+// // /*--------------------------------Appointment--------------------------------*/
+// Route::view('/appointment', 'system.appointment')->name('appointment');
 
-// /*--------------------------------Financing--------------------------------*/
-Route::view('/financing-confirmation', 'admin.fin-confirmation')->name('financing-confirmation');
-Route::view('/financing-status', 'admin.fin-status')->name('financing-status');
+// // /*--------------------------------Financing--------------------------------*/
+// Route::view('/financing-confirmation', 'system.fin-confirmation')->name('financing-confirmation');
+// Route::view('/financing-status', 'system.fin-status')->name('financing-status');
 
-// /*--------------------------------Trade-in--------------------------------*/
-Route::view('/trade-requests', 'admin.ti-trade-requests')->name('trade-requests');
-Route::view('/trade-in-status', 'admin.ti-status')->name('trade-in-status');
-Route::view('/traded-units', 'admin.ti-traded')->name('traded-units');
+// // /*--------------------------------Trade-in--------------------------------*/
+// Route::view('/trade-requests', 'system.ti-trade-requests')->name('trade-requests');
+// Route::view('/trade-in-status', 'system.ti-status')->name('trade-in-status');
+// Route::view('/traded-units', 'system.ti-traded')->name('traded-units');
 
-// /*--------------------------------Receipt--------------------------------*/
-Route::view('/acknowledgment-receipt', 'admin.rcpt-acknowledgment')->name('acknowledgment-receipt');
-Route::view('/receipt-records', 'admin.rcpt-records')->name('receipt-records');
+// // /*--------------------------------Receipt--------------------------------*/
+// Route::view('/acknowledgment-receipt', 'system.rcpt-acknowledgment')->name('acknowledgment-receipt');
+// Route::view('/receipt-records', 'system.rcpt-records')->name('receipt-records');
 
-// /*--------------------------------Walk-in--------------------------------*/
-Route::view('/walk-in-unit', 'admin.wi-unit')->name('walk-in-unit');
-Route::view('/walk-in-financing', 'admin.wi-financing')->name('walk-in-financing');
-Route::view('/walk-in-trade-in', 'admin.wi-trade-in')->name('walk-in-trade-in');
-Route::view('/walk-in-carwash', 'admin.wi-carwash')->name('walk-in-carwash');
-Route::view('/walk-in-detailing', 'admin.wi-detailing')->name('walk-in-detailing');
-Route::view('/walk-in-paintjob', 'admin.wi-paintjob')->name('walk-in-paintjob');
+// // /*--------------------------------Walk-in--------------------------------*/
+// Route::view('/walk-in-unit', 'system.wi-unit')->name('walk-in-unit');
+// Route::view('/walk-in-financing', 'system.wi-financing')->name('walk-in-financing');
+// Route::view('/walk-in-trade-in', 'system.wi-trade-in')->name('walk-in-trade-in');
+// Route::view('/walk-in-carwash', 'system.wi-carwash')->name('walk-in-carwash');
+// Route::view('/walk-in-detailing', 'system.wi-detailing')->name('walk-in-detailing');
+// Route::view('/walk-in-paintjob', 'system.wi-paintjob')->name('walk-in-paintjob');
 
-// /*--------------------------------Car-Wash--------------------------------*/
-Route::view('/car-wash-confirmation', 'admin.cw-confirmation')->name('car-wash-confirmation');
-Route::view('/car-wash-records', 'admin.cw-records')->name('car-wash-records');
+// // /*--------------------------------Car-Wash--------------------------------*/
+// Route::view('/car-wash-confirmation', 'system.cw-confirmation')->name('car-wash-confirmation');
+// Route::view('/car-wash-records', 'system.cw-records')->name('car-wash-records');
 
-// /*--------------------------------Auto-Detailing--------------------------------*/
-Route::view('/auto-detailing-confirmation', 'admin.ad-confirmation')->name('auto-detailing-confirmation');
-Route::view('/auto-detailing-payment', 'admin.ad-payment')->name('auto-detailing-payment');
-Route::view('/auto-detailing-records', 'admin.ad-records')->name('auto-detailing-records');
+// // /*--------------------------------Auto-Detailing--------------------------------*/
+// Route::view('/auto-detailing-confirmation', 'system.ad-confirmation')->name('auto-detailing-confirmation');
+// Route::view('/auto-detailing-payment', 'system.ad-payment')->name('auto-detailing-payment');
+// Route::view('/auto-detailing-records', 'system.ad-records')->name('auto-detailing-records');
 
-// /*--------------------------------Auto-Detailing--------------------------------*/
-Route::view('/paint-job-confirmation', 'admin.pj-confirmation')->name('paint-job-confirmation');
-Route::view('/paint-job-payment', 'admin.pj-payment')->name('paint-job-payment');
-Route::view('/paint-job-records', 'admin.pj-records')->name('paint-job-records');
-
-
+// // /*--------------------------------Auto-Detailing--------------------------------*/
+// Route::view('/paint-job-confirmation', 'system.pj-confirmation')->name('paint-job-confirmation');
+// Route::view('/paint-job-payment', 'system.pj-payment')->name('paint-job-payment');
+// Route::view('/paint-job-records', 'system.pj-records')->name('paint-job-records');
 
 
-Route::get('/sample', [UserController::class, 'sample']);
+// Auth::routes();
+
+Route::get('/sample', [HomeController::class, 'sample'])->name('sample');
 
 // Route::get('/services', function(){
 //     return view('home.services');
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/services', [HomeController::class, 'services'])->name('services');
-Route::get('/vehicles', [HomeController::class, 'vehicles'])->name('vehicles');
-Route::get('/new-arrival', [HomeController::class, 'newArrival'])->name('new-arrival');
+
+Route::middleware(['auth', 'preventBackhHistory'])->group(function(){
+    Route::prefix('services')->name('services.')->group(function(){
+        Route::get('/carwash', [ServiceController::class, 'carwash'])->name('carwash');
+        Route::post('/carwash/check', [ServiceController::class, 'check'])->name('check');
+        Route::view('/carwash/done', 'services.carwash.done')->name('done');
+
+        Route::get('/auto-detailing', [ServiceController::class, 'autodetailing'])->name('auto-detailing');
+        Route::post('/auto-detailing/check', [ServiceController::class, 'check1'])->name('check1');
+        Route::view('/auto-detailing/done', 'services.auto-detailing.done')->name('done1');
+        Route::get('/paintjob', [ServiceController::class, 'paintjob'])->name('paintjob');
+    });
+});
+
+
+Route::get('/vehicles', [UnitController::class, 'vehicles'])->name('vehicles');
+Route::get('/vehicles/trade-in/{uid}', [TradeController::class, 'show']);
+Route::post('/vehicles/trade-in/done', [TradeController::class, 'store']);
+Route::get('/vehicles/view-details/{uid}', [AppointmentController::class, 'show']);
+Route::post('/vehicles/view-details/done', [AppointmentController::class, 'store']);
+
+Route::get('/new-arrival', [UnitController::class, 'newArrival'])->name('new-arrival');
+Route::get('/new-arrival/trade-in/{uid}', [TradeController::class, 'show']);
+Route::get('/new-arrival/view-details/{uid}', [AppointmentController::class, 'show']);
+
+// Route::view('/view-details', 'home.view-details');
+
 Route::get('/financing-calculator', [HomeController::class, 'finanCal'])->name('financing-calculator');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 
-Route::get('/register', [UserController::class, 'register'])->name('register');
-Route::get('/login', [UserController::class, 'login'])->name('login');
-Route::post('/login/process', [UserController::class, 'process']);
-Route::post('/logout', [UserController::class, 'logout']);
+Route::middleware(['guest'])->group(function(){
+    Route::view('/login', 'user.login')->name('login');
+    Route::view('/register', 'user.register')->name('register');
+    Route::post('/login/process', [UserController::class, 'process'])->name('process');
+    Route::post('/store', [UserController::class, 'store'])->name('store');
+});
 
-Route::post('/store', [UserController::class, 'store'])->name('store');
+
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+
+
 

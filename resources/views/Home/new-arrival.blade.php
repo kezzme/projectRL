@@ -31,23 +31,62 @@
       <img src="img/{{ $unit->image }}">
       <h3>{{ $unit->car_year }} {{ $unit->car_make }} {{ $unit->car_model }}</h3>
       <h5>{{ $unit->car_variant }}</h5>
-      <div class="price">₱{{ $unit->price }}</div>
+      <div class="price">₱{{ number_format($unit->price, 0, '.', ',') }}</div>
       <p>
         <span class="fa-solid fa-microchip"></span> {{ $unit->engine }}
         <span class="fa-solid fa-gauge"></span> {{ $unit->transmission }}
         <span class="fa-solid fa-gas-pump"></span> {{ $unit->fuel }}
       </p>
       <div>
-        <a class="btn btn-primary col-md-4 animated slideInDown" href="">Trade-in</a>
-        <a class="btn btn-primary col-md-4 animated slideInDown" href="">View Details</a>
+        @auth
+          <a class="btn btn-primary col-md-4 animated slideInDown" href="/vehicles/trade-in/{{$unit->uid}}">Trade-in</a>
+          <a class="btn btn-primary col-md-4 animated slideInDown" href="/vehicles/view-details/{{$unit->uid}}">View Details</a>
+        @else
+          <a class="btn btn-primary col-md-4 animated slideInDown" data-bs-toggle="modal" href="#tradeInModalToggle">Trade-in</a>
+          <a class="btn btn-primary col-md-4 animated slideInDown" data-bs-toggle="modal" href="#viewDetailsModalToggle">View Details</a>
+        @endauth
       </div>
     </div> 
     @endforeach 
 </div>
 </div>
+<!-- Testimonial End -->
 
-<!-- Testimonial End --> 
+
+<!-- Modal Start -->
+<div class="modal fade" id="tradeInModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Login Prompt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       To continue with <b>Trade-in</b>, please Login.
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-rounded" type="button" href="{{ route('login')}}">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="viewDetailsModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Login Prompt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        To continue with <b>View Details</b>, please Login.
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-rounded" type="button" href="{{ route('login')}}">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal End -->
 
 @include('home.footer')
-
-<script src="js/main.js"></script>
+</x-landing-layout>

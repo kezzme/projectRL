@@ -11,8 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('car_wash', function (Blueprint $table) {
+        Schema::create('car_washes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('contact');
+            $table->string('car_make');
+            $table->string('car_model');
+            $table->string('plate_no');
+            $table->string('body_type');
+            $table->decimal('amount', 8, 2); 
+            $table->date('date');
+            $table->string('time');
+            $table->text('special_request')->nullable();
             $table->timestamps();
         });
     }

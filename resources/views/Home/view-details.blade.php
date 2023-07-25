@@ -3,7 +3,7 @@
   @include('home.nav-bar')
   
 <!-- Page Header Start -->
-<div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-bg-9.jpg);">
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url({{ asset('img/carousel-bg-9.jpg')}});">
   <div class="container-fluid page-header-inner py-5">
     <div class="container text-center">
       <h1 class="display-3 text-white mb-3 animated slideInDown">View Details</h1>
@@ -32,31 +32,31 @@
           <div id="carouselExampleFade" class="carousel slide carousel-fade">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="img/sample/1.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_1) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/2.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_2) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/3.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_3) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/4.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_4) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/5.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_5) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/6.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_6) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/7.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_7) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/8.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_8) }}" class="d-block w-100" />
               </div>
               <div class="carousel-item">
-                <img src="img/sample/9.jpg" class="d-block w-100">
+                <img src="{{ url('storage/images/'.$units->car_model.'/'.$units->display_image_9) }}" class="d-block w-100" />
               </div>
               <!-- 9 IMAGES -->
             </div>
@@ -74,7 +74,7 @@
       <div class="col-lg-6">
         <h6>&nbsp;</h6>
         <h1 class="">
-          <span class="text-primary">2019</span> Mitsubishi Xpander GLS
+          <span class="text-primary">{{ $units->car_year }}</span> {{ $units->car_make }} {{ $units->car_model }} {{ $units->car_variant }}
         </h1>
         <h3 class="">
             ₱980,000
@@ -237,45 +237,55 @@
       <div class="col-lg-7">
         <div class="bg-primary h-100 d-flex flex-column p-5 wow zoomIn" data-wow-delay="0.6s">
           <h1 class="text-white mb-4 justify-content-center text-center">Appointment Form</h1>
-          <form>
+          <form action="/vehicles/view-details/done" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="row g-3">
               <div class="col-12 col-sm-6">
-                <input type="text" class="form-control btn-rounded" placeholder="First Name" style="height: 55px;">
+                <div class=" input-group">
+                  <div class="col-md-4 input-group-text justify-content-center btn-rounded">First Name</div>
+                  <input type="text" name="first_name" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{auth()->user()->first_name}}" readonly>
+                </div>
               </div>
               <div class="col-12 col-sm-6">
-                <input type="text" class="form-control btn-rounded" placeholder="Last Name" style="height: 55px;">
+                <div class=" input-group">
+                  <div class="col-md-4 input-group-text justify-content-center btn-rounded">Last Name</div>
+                  <input type="text" name="last_name" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{auth()->user()->last_name}}" readonly>
+                </div>
               </div>
               <div class="col-12 col-sm-4">
-                <input type="text" class="form-control btn-rounded" placeholder="Phone No." style="height: 55px;">
+                <div class=" input-group">
+                  <div class="col-md-4 input-group-text justify-content-center btn-rounded">Contact</div>
+                  <input type="text" name="phone" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{auth()->user()->phone}}" readonly>
+                </div>
               </div>
               <div class="col-12 col-sm-4">
                 <div class=" input-group">
                   <div class="col-md-5 input-group-text justify-content-center btn-rounded">Year</div>
-                  <input type="text" class="form-control btn-rounded" style="height: 55px; text-transform:uppercase;" disabled>
+                  <input type="text" name="car_year" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{$units->car_year}}" readonly>
                 </div>
               </div>
               <div class="col-12 col-sm-4">
                 <div class=" input-group">
                   <div class="col-md-5 input-group-text justify-content-center btn-rounded">Make</div>
-                  <input type="text" class="form-control btn-rounded" style="height: 55px; text-transform:uppercase;" disabled>
+                  <input type="text" name="car_make" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{$units->car_make}}" readonly>
                 </div>
               </div>
               <div class="col-12 col-sm-4">
                 <div class=" input-group">
                   <div class="col-md-5 input-group-text justify-content-center btn-rounded">Model</div>
-                  <input type="text" class="form-control btn-rounded" style="height: 55px; text-transform:uppercase;" disabled>
+                  <input type="text" name="car_model" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{$units->car_model}}" readonly>
                 </div>
               </div>
               <div class="col-12 col-sm-4">
                 <div class=" input-group">
                   <div class="col-md-5 input-group-text justify-content-center btn-rounded">Variant</div>
-                  <input type="text" class="form-control btn-rounded" style="height: 55px; text-transform:uppercase;" disabled>
+                  <input type="text" name="car_variant" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{$units->car_variant}}" readonly>
                 </div>
               </div>
               <div class="col-12 col-sm-4">
                 <div class=" input-group">
                   <div class="col-md-5 input-group-text justify-content-center btn-rounded">Price</div>
-                  <input type="text" class="form-control btn-rounded" style="height: 55px; text-transform:uppercase;" disabled>
+                  <input type="text" name="price" class="form-control btn-rounded" style="height: 50px;" step="0.01" value="{{$units->price}}" readonly>
                 </div>
               </div>
               <div class="col-lg-6">
@@ -304,19 +314,24 @@
                 </div>
               </div>
               <div class="col-12 hidden" id="selectedDateTime">
-                <div class="card bg-blue btn-rounded justify-content-center text-white" style="height: 35px;">
-                  <div class="card-body row ">
-                    <div class="col-md-11">
-                      <span>
-                        <i class="fa-regular fa-calendar-days"></i> You've selected <label id="selectedTime"></label> on <label id="selectedDate"></label>
-                        <span>
-                    </div>
-                    <div class="col-md-1 justify-content-end">
-                      <i class="fa-solid fa-circle-xmark" type="button" onclick="closeDateTime()"></i>
-                    </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    
+                      <div class="input-group"> 
+                        <span class="input-group-text btn-rounded">You've selected</span>
+                        <input type="text" class="form-control btn-rounded text-center" id="selectedTime" name="time"  readonly required>
+                        <span class="input-group-text">on</span>
+                        <input type="text" class="form-control btn-rounded text-center" id="selectedDate" name="date" readonly required>
+                        <button class="input-group-text btn btn-light btn-rounded" type="button" onclick="closeDateTime()"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+
+                      {{-- <i class="fa-regular fa-calendar-days"></i> You've selected <label ></label> on <label ></label> --}}
+                   
                   </div>
                 </div>
-              </div>
+            </div>
+            <input type="text" class="hidden" name="user_id" value="{{auth()->user()->id}}" readonly>
+            <input type="text" class="hidden" name="uid" value="{{$units->uid}}" readonly>
               <div class="col-12">
                 <button class="btn btn-secondary w-100 py-3 btn-rounded" type="submit">Book Now</button>
               </div>
@@ -329,7 +344,7 @@
 </div>
 <!-- Booking End --> 
 
-@include('home.footer')
+{{-- @include('home.footer') --}}
 </x-landing-layout>
 
 <script>
@@ -341,21 +356,23 @@
     enableTimeButtons();
     updateSelectedDateTime();
   }
+  var selectedDate = document.getElementById("selectedDate").innerHTML;
+  var selectedTime = document.getElementById("selectedTime").innerHTML;
 
   function selectTime(time) {
-    if (selectedDate !== "") {
-      var selectedTime = time;
-      document.getElementById("selectedDate").textContent = formatSelectedDate(selectedDate);
-      document.getElementById("selectedTime").textContent = selectedTime;
-      document.getElementById("selectedDateTime").style.display = "block";
-      if (selectedButton !== null) {
-        selectedButton.classList.remove("selected");
-      }
-      // Set the clicked button as selected
-      selectedButton = document.getElementById("btn" + time.replace(/:/g, ""));
-      selectedButton.classList.add("selected");
+  if (selectedDate !== "") {
+    var selectedTime = time;
+    document.getElementById("selectedDate").value = selectedDate;
+    document.getElementById("selectedTime").value = selectedTime;
+    document.getElementById("selectedDateTime").style.display = "block";
+    if (selectedButton !== null) {
+      selectedButton.classList.remove("selected");
     }
+    // Set the clicked button as selected
+    selectedButton = document.getElementById("btn" + time.replace(/:/g, ""));
+    selectedButton.classList.add("selected");
   }
+}
 
   function updateSelectedDateTime() {
     if (selectedDate !== "") {
@@ -369,6 +386,7 @@
       }
     }
   }
+
 
   function formatSelectedDate(date) {
     var options = {
@@ -391,7 +409,7 @@
   }
   flatpickr("#datepicker", {
     inline: true,
-    // defaultDate: new Date().fp_incr(1),
+    defaultDate: new Date().fp_incr(1),
     minDate: "today",
     maxDate: new Date().fp_incr(30),
     disable: [
@@ -432,4 +450,7 @@
     document.getElementById("btn3PM").setAttribute("disabled", "disabled");
     document.getElementById("btn5PM").setAttribute("disabled", "disabled");
   }
+
+ 
+
 </script>

@@ -68,13 +68,7 @@
         } else {
             $dropdown.off("mouseenter mouseleave");
         }
-    });
-
-    $(function() {
-
-        rome(inline_cal, { time: false });
-      
-      });    
+    });  
     
     
     // Back to top button

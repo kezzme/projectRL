@@ -438,3 +438,55 @@
     background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../img/carousel-bg-15.jpg) center center no-repeat;
     background-size: cover;
 }
+
+.carwash {
+    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../img/carousel-bg-17.jpg) center center no-repeat;
+    background-size: cover;
+}
+
+
+
+#selectedPhotos {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+   
+}
+
+.photo-card {
+    max-width: calc(33.33% - 10px);
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.photo-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+.custom-calendar {
+    width: 100%; /* Adjust the width to fit the container */
+    max-width: 400px; /* Set a maximum width to prevent it from occupying the entire screen on large devices */
+  }
+  
+  /* CSS for the Flatpickr input field */
+  #datepicker {
+    width: 100%; /* Make the input field width responsive to its container */
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Media query for small screens */
+  @media screen and (max-width: 480px) {
+    .custom-calendar {
+      max-width: 100%; /* On small screens, make the calendar occupy the full width of the screen */
+    }
+  }

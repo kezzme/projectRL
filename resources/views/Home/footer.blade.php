@@ -22,10 +22,10 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Financing Company</h4>
-                    <span><img src="img/finance-1.jpg" class="footer-img"></span>
-                    <span><img src="img/finance-2.jpg" class="footer-img"></span>
-                    <span><img src="img/finance-3.jpg" class="footer-img"></span>
-                    <span><img src="img/finance-4.jpg" class="footer-img"></span>
+                    <span><img src="{{ asset('img/finance-1.jpg')}}" class="footer-img"></span>
+                    <span><img src="{{ asset('img/finance-2.jpg')}}" class="footer-img"></span>
+                    <span><img src="{{ asset('img/finance-3.jpg')}}" class="footer-img"></span>
+                    <span><img src="{{ asset('img/finance-4.jpg')}}" class="footer-img"></span>
                 </div>
                 
             </div>
