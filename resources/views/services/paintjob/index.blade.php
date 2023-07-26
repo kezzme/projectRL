@@ -10,7 +10,7 @@
 <div class="container-fluid page-header mb-5 p-0" style="background-image: url({{ asset('img/carousel-bg-2.jpg')}});">
   <div class="container-fluid page-header-inner py-5">
     <div class="container text-center">
-      <h1 class="display-3 text-white mb-3 animated slideInDown">Car Wash</h1>
+      <h1 class="display-3 text-white mb-3 animated slideInDown">Paint Job</h1>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb justify-content-center text-uppercase">
           <li class="breadcrumb-item">
@@ -19,7 +19,7 @@
           <li class="breadcrumb-item">
             <a href="#">Services</a>
           </li>
-          <li class="breadcrumb-item text-white active" aria-current="page">Car Wash</li>
+          <li class="breadcrumb-item text-white active" aria-current="page">Paint Job</li>
         </ol>
       </nav>
     </div>
@@ -33,7 +33,7 @@
     <div class="row gx-5">
       <div class="col-lg-5 py-5">
         <div class="py-5">
-          <h1 class="text-white mb-4">Requirements</h1>
+          <h1 class="text-white mb-4">Lorem Ipsum</h1>
           <p class="text-white mb-0">
               Experience the Ultimate Car Detailing Service! 
               Unveil the True Beauty of Your Vehicle with Our Expert Team. 
@@ -57,10 +57,10 @@
       </div>
       <div class="col-lg-7">
         <div class="bg-primary h-100 d-flex flex-column  p-5 wow zoomIn" data-wow-delay="0.6s">
-          <h1 class="text-white mb-4 justify-content-center text-center">Car Wash Form</h1>
-          <form action="/services/carwash/check" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+          <h1 class="text-white mb-4 justify-content-center text-center">Paint Job Form</h1>
+          <form action="/services/paintjob/check" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf 
-            <div class="row g-3">
+            <div class="row g-3 justify-content-center">
               <div class="col-12 col-sm-6">
                   <div class=" input-group">
                     <label class="col-md-4 input-group-text justify-content-center btn-rounded">First Name</label>
@@ -85,16 +85,28 @@
                     <input type="text" name="email" class="form-control btn-rounded" style="height: 50px;" value="{{auth()->user()->email}}" readonly>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4">
+                <div class="col-12 col-sm-6">
                   <div class=" input-group">
                     <label class="col-md-5 input-group-text justify-content-center btn-rounded">Make</label>
                     <input type="text" name="car_make" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{ old('car_make') }}"  required>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4">
+                <div class="col-12 col-sm-6">
                   <div class=" input-group">
                     <label class="col-md-5 input-group-text justify-content-center btn-rounded">Model</label>
                     <input type="text" name="car_model" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{ old('car_model') }}" required>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class=" input-group">
+                    <label class="col-md-5 input-group-text justify-content-center btn-rounded">Variant</label>
+                    <input type="text" name="car_variant" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{ old('car_make') }}"  required>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class=" input-group">
+                    <label class="col-md-5 input-group-text justify-content-center btn-rounded">Year</label>
+                    <input type="text" name="car_year" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{ old('car_make') }}"  required>
                   </div>
                 </div>
               <div class="col-12 col-sm-4">
@@ -103,30 +115,8 @@
                       <input type="text" name="plate_no" class="form-control btn-rounded" style="height: 55px; text-transform:uppercase;" value="{{ old('plate_no') }}" required>
                   </div>
               </div>
-              <div class="col-12 col-sm-7">
-                  <div class=" input-group">
-                      <label class="col-md-5 input-group-text justify-content-center btn-rounded">Body Type</label>
-                      <select class="form-select btn-rounded" name="body_type" id="dropdownList" style="height: 55px;" value="{{ old('body_type') }}" required>
-                        <option value="Sedan" data-price="90.00" selected>Sedan</option>
-                          <option value="Hatchback" data-price="90.00">Hatchback</option>
-                          <option value="SUV" data-price="120.00">SUV</option>
-                          <option value="MPV" data-price="120.00">MPV</option>
-                          <option value="AUV" data-price="120.00">AUV</option>
-                          <option value="Coupe" data-price="90.00">Coupe</option>
-                          <option value="Crossover" data-price="120.00">Crossover</option>
-                          <option value="Pick-Up Truck" data-price="120.00">Pick-Up Truck</option>
-                          <option value="Van" data-price="120.00">Van</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="col-12 col-sm-5">
-                  <div class=" input-group">
-                      <label class="col-md-5 input-group-text justify-content-center btn-rounded">Amount</label>
-                      <input type="text" class="form-control btn-rounded" name="amount" style="height: 55px;" id="outputInput" value="{{ old('amount') }}" readonly required>
-                  </div>
-              </div>
               <div class="col-lg-6">
-                <div class="col-md-12" id="custom-calendar">
+                <div class="col-md-12">
                   <input type="text" class="form-control btn-rounded hidden" id="datepicker" name="date" required>
                 </div>
               </div>              
@@ -153,10 +143,10 @@
                 </div>
               </div>
               <input type="text" class="hidden" name="user_id" value="{{auth()->user()->id}}" readonly>
+              <input type="text" class="hidden" name="status" value="pending" readonly>
               <div class="col-12 hidden" id="selectedDateTime">
                   <div class="row">
                     <div class="col-md-12">
-                      
                         <div class="input-group"> 
                           <span class="bg-warning input-group-text btn-rounded">You've selected</span>
                           <input type="text" class="bg-warning form-control btn-rounded text-center" id="selectedTime" name="time" readonly required>
@@ -167,9 +157,17 @@
                     </div>
                   </div>
               </div>
-              <div class="col-12">
-                <textarea class="form-control btn-rounded" name="special_request" maxlength="250" placeholder="Special Request" value="{{ old('special_request') }}"></textarea>
-            </div>
+            <div class="col-12">
+                  <textarea class="form-control btn-rounded" name="special_request" maxlength="250" placeholder="Special Request" value="{{ old('special_request') }}"></textarea>
+              </div>
+            <div class="col-12 col-sm-12 d-grid gap-2 d-md-flex">
+              <input type="file" class="form-control btn-rounded" name="photos[]" id="photoInput" accept="image/*" multiple required>
+          </div>
+            <div class="col-12 col-sm-12 d-grid gap-2 d-md-flex justify-content-center">
+              <div class="row">
+                  <div id="selectedPhotos"></div>
+              </div>
+          </div>
               <div class="col-12">
                 <button id="submitButton" class="btn btn-secondary w-100 py-3 btn-rounded" type="submit">Submit</button>
               </div>
@@ -183,6 +181,23 @@
 <!-- Booking End -->
 
  <!-- Modal -->
+ <div class="modal fade" id="limitModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Maximum Limit Reached</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>You can select a maximum of 6 image files.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary btn-rounded" data-bs-dismiss="modal">OK</button>
+          </div>
+      </div>
+  </div>
+</div>
 <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="validationModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -208,27 +223,54 @@
 </x-landing-layout>
 
 <script>
-  const dropdownList = document.getElementById("dropdownList");
-  const outputInput = document.getElementById("outputInput");
+  // Format the "Total Price" field with decimal places and comma separators
+  var totalPriceInput = document.getElementById("totalPrice");
+  totalPriceInput.addEventListener("input", function() {
+    totalPriceInput.value = formatNumber(this.value.replace(/[^0-9.]/g, ""));
+  });
+</script>
 
-  // Add event listener to the dropdown list
-  dropdownList.addEventListener("change", updatePrice);
+<script>
+  function formatNumber(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+   const photoInput = document.getElementById('photoInput');
+      const selectedPhotosDiv = document.getElementById('selectedPhotos');
+      const MAX_PHOTOS = 6;
 
-  // Function to update the price input field with the selected option's price
-  function updatePrice() {
-      const selectedOption = dropdownList.options[dropdownList.selectedIndex].value;
-      const selectedPrice = dropdownList.options[dropdownList.selectedIndex].dataset.price;
-      outputInput.value = selectedPrice;
-  }
+      photoInput.addEventListener('change', handleFileSelect);
+
+      function handleFileSelect(event) {
+          const files = event.target.files;
+          selectedPhotosDiv.innerHTML = ""; // Clear previous selection
+
+          if (files.length > MAX_PHOTOS) {
+              // Reset file input
+              photoInput.value = "";
+              // Show the modal
+              $('#limitModal').modal('show');
+              return;
+          }
+
+          for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+
+              if (file.type.startsWith('image/')) {
+                  // Check if the file is an image
+                  const card = document.createElement('div');
+                  card.className = "card photo-card";
+                  const img = document.createElement('img');
+                  img.src = URL.createObjectURL(file);
+                  img.className = "card-img-top";
+                  card.appendChild(img);
+                  selectedPhotosDiv.appendChild(card);
+              }
+          }
+      }
 </script>
 
 
 <script>
-  document.getElementById('dropdownList').addEventListener('change', function() {
-    var dropdownValue = this.value;
-    document.getElementById('targetInput').value = dropdownValue;
-    targetInput.value = dropdownValue + '.00';
-  });
 
   var selectedDate = ""; // Global variable to store the selected date
   var selectedButton = null; // Global variable to store the selected button
@@ -306,7 +348,7 @@ function disableTimeButtons() {
 
   flatpickr("#datepicker", {
     inline: true,
-    defaultDate: "tomorrow",
+  //   defaultDate: new Date().fp_incr(1),
     minDate: new Date().fp_incr(1),
     maxDate: new Date().fp_incr(30),
     disable: [

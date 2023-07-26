@@ -2,6 +2,10 @@
 
   @include('home.nav-bar')
 
+@if (session('error'))
+  <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
 <!-- Page Header Start -->
 <div class="container-fluid page-header mb-5 p-0" style="background-image: url({{ asset('img/carousel-bg-10.jpg')}});">
   <div class="container-fluid page-header-inner py-5">
@@ -230,9 +234,8 @@
       <div class="col-lg-7">
         <div class="bg-primary h-100 d-flex flex-column  p-5 wow zoomIn" data-wow-delay="0.6s">
           <h1 class="text-white mb-4 justify-content-center text-center">Trade-in Form</h1>
-          <form action="/vehicles/trade-in/done" method="POST" enctype="multipart/form-data">
+          <form action="/vehicles/trade-in/check" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
-            
             <div class="row g-3">
               <div class="col-12 col-sm-6">
                 <div class=" input-group">
@@ -249,7 +252,7 @@
               <div class="col-12 col-sm-5">
                 <div class=" input-group">
                   <div class="col-md-4 input-group-text justify-content-center btn-rounded">Contact</div>
-                  <input type="text" name="phone" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{auth()->user()->phone}}" readonly>
+                  <input type="text" name="contact" class="form-control btn-rounded" style="height: 50px; text-transform:uppercase;" value="{{auth()->user()->phone}}" readonly>
                 </div>
               </div>
               <div class="col-12 col-sm-7">
@@ -291,11 +294,9 @@
               <div class="col-12 col-sm-7">
                 <div class=" input-group">
                   <div class="col-md-5 input-group-text justify-content-center btn-rounded">Unit Price</div>
-                  <input type="text" name="unit_price" class="form-control btn-rounded" style="height: 50px;" required>
+                  <input type="text" id="totalPrice" name="unit_price" class="form-control btn-rounded" style="height: 50px;" required>
                 </div>
               </div>
-             
-              
               <div class="col-lg-6">
                 <div class="col-md-12">
                   <input type="text" class="form-control btn-rounded hidden" id="datepicker" name="date" required>
@@ -337,10 +338,13 @@
                   </div>
               </div>
               <input type="text" class="hidden" name="user_id" value="{{auth()->user()->id}}" readonly>
+              <input type="text" class="hidden" name="uid" value="{{$units->uid}}" readonly>
               <input type="text" class="hidden" name="car_year" value="{{$units->car_year}}" readonly>
               <input type="text" class="hidden" name="car_make" value="{{$units->car_make}}" readonly>
               <input type="text" class="hidden" name="car_model" value="{{$units->car_model}}" readonly>
               <input type="text" class="hidden" name="car_variant" value="{{$units->car_variant}}" readonly>
+              <input type="text" class="hidden" name="car_price" value="{{$units->price}}" readonly>
+              <input type="text" class="hidden" name="status" value="pending" readonly>
               <div class="col-12 col-sm-12 d-grid gap-2 d-md-flex">
                 <input type="file" class="form-control btn-rounded" name="photos[]" id="photoInput" accept="image/*" multiple required>
             </div>

@@ -12,13 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class TradeinMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $tradeDetails;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($tradeDetails)
     {
-        //
+        $this->tradeDetails = $tradeDetails;
     }
 
     /**
@@ -34,11 +34,15 @@ class TradeinMail extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    // public function content(): Content
+    // {
+    //     return new Content(
+    //         view: 'view.name',
+    //     );
+    // }
+    public function build()
     {
-        return new Content(
-            view: 'view.name',
-        );
+        return $this->view('trade-in.mail');
     }
 
     /**

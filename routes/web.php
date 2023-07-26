@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UnitController;
@@ -10,7 +10,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AppointmentController;
-use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +91,6 @@ use Illuminate\Support\Facades\Auth;
 
 // Auth::routes();
 
-Route::get('/sample', [HomeController::class, 'sample'])->name('sample');
 
 // Route::get('/services', function(){
 //     return view('home.services');
@@ -108,19 +107,30 @@ Route::middleware(['auth', 'preventBackhHistory'])->group(function(){
         Route::get('/auto-detailing', [ServiceController::class, 'autodetailing'])->name('auto-detailing');
         Route::post('/auto-detailing/check', [ServiceController::class, 'check1'])->name('check1');
         Route::view('/auto-detailing/done', 'services.auto-detailing.done')->name('done1');
+
         Route::get('/paintjob', [ServiceController::class, 'paintjob'])->name('paintjob');
+        Route::post('/paintjob/check', [ServiceController::class, 'check2'])->name('check2');
+        Route::view('/paintjob/done', 'services.paintjob.done')->name('done2');
     });
 });
 
-
 Route::get('/vehicles', [UnitController::class, 'vehicles'])->name('vehicles');
-Route::get('/vehicles/trade-in/{uid}', [TradeController::class, 'show']);
-Route::post('/vehicles/trade-in/done', [TradeController::class, 'store']);
+Route::middleware(['auth', 'preventBackhHistory'])->group(function(){
+    Route::prefix('vehicles')->name('vehicles.')->group(function(){
+        Route::get('/vehicles/trade-in/{uid}', [TradeController::class, 'show'])->name('trade-in');
+        Route::post('/vehicles/trade-in/check', [TradeController::class, 'check'])->name('check3');
+        Route::view('/vehicles/trade-in/done', 'trade-in.done')->name('done3');
+    });
+});
+        
+
+
+
 Route::get('/vehicles/view-details/{uid}', [AppointmentController::class, 'show']);
 Route::post('/vehicles/view-details/done', [AppointmentController::class, 'store']);
 
 Route::get('/new-arrival', [UnitController::class, 'newArrival'])->name('new-arrival');
-Route::get('/new-arrival/trade-in/{uid}', [TradeController::class, 'show']);
+Route::get('/new-arrival/trade-in/{uid}', [TradeController::class, 'show1']);
 Route::get('/new-arrival/view-details/{uid}', [AppointmentController::class, 'show']);
 
 // Route::view('/view-details', 'home.view-details');

@@ -39,8 +39,8 @@
       </p>
       <div>
         @auth
-          <a class="btn btn-primary col-md-4 animated slideInDown" href="/vehicles/trade-in/{{$unit->uid}}">Trade-in</a>
-          <a class="btn btn-primary col-md-4 animated slideInDown" href="/vehicles/view-details/{{$unit->uid}}">View Details</a>
+          <a class="btn btn-primary col-md-4 animated slideInDown" href="/new-arrival/trade-in/{{$unit->uid}}">Trade-in</a>
+          <a class="btn btn-primary col-md-4 animated slideInDown" href="/new-arrival/view-details/{{$unit->uid}}">View Details</a>
         @else
           <a class="btn btn-primary col-md-4 animated slideInDown" data-bs-toggle="modal" href="#tradeInModalToggle">Trade-in</a>
           <a class="btn btn-primary col-md-4 animated slideInDown" data-bs-toggle="modal" href="#viewDetailsModalToggle">View Details</a>

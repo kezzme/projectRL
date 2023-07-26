@@ -146,10 +146,6 @@ class ServiceController extends Controller
         $exadUser = AutoDetailings::where('user_id', $user_id)->first();
 
         $exadPlateno = AutoDetailings::where('plate_no', $plate_no)->first();
-
-        $expjUser = Paintjobs::where('user_id', $user_id)->first();
-
-        $expjPlateno = Paintjobs::where('plate_no', $plate_no)->first();
         
         if ($excwUser) {
             return redirect()->back()->with('error', 'You have already book a slot for Car Wash.');
@@ -162,13 +158,7 @@ class ServiceController extends Controller
         }
         elseif ($exadPlateno) {
             return redirect()->back()->with('error', 'The unit is already book a slot for Auto Detailing.');
-        } 
-        elseif ($expjUser) {
-            return redirect()->back()->with('error', 'You have already book a slot for Paint Job.');
         }
-        elseif ($expjPlateno) {
-            return redirect()->back()->with('error', 'The unit is already book a slot for Paint Job.');
-        } 
         elseif ($exadBook) {
             return redirect()->back()->with('error', 'The selected Time are already taken. Please choose another slot.');
         } 
@@ -176,7 +166,12 @@ class ServiceController extends Controller
             $photoDetails = [];
             foreach ($request->file('photos') as $index => $photoFile) {
                 $originalFilename = $photoFile->getClientOriginalName();
+
+                $folderPath = 'auto-detailing';
+                $path = $photoFile->store($folderPath, 'public');
+
                 $photoDetails[] = $originalFilename;
+                $photoDetails[] = $path;
             }
 
             $adInfo = AutoDetailings::create([
@@ -235,10 +230,6 @@ class ServiceController extends Controller
 
         $excwPlateno = Carwashes::where('plate_no', $plate_no)->first();
 
-        $exadUser = AutoDetailings::where('user_id', $user_id)->first();
-
-        $exadPlateno = AutoDetailings::where('plate_no', $plate_no)->first();
-
         $expjUser = Paintjobs::where('user_id', $user_id)->first();
 
         $expjPlateno = Paintjobs::where('plate_no', $plate_no)->first();
@@ -248,12 +239,6 @@ class ServiceController extends Controller
         }
         elseif ($excwPlateno) {
             return redirect()->back()->with('error', 'The unit is already book a slot for Car Wash.');
-        } 
-        elseif ($exadUser) {
-            return redirect()->back()->with('error', 'You have already book a slot for Auto Detailing.');
-        }
-        elseif ($exadPlateno) {
-            return redirect()->back()->with('error', 'The unit is already book a slot for Auto Detailing.');
         } 
         elseif ($expjUser) {
             return redirect()->back()->with('error', 'You have already book a slot for Paint Job.');
@@ -268,7 +253,12 @@ class ServiceController extends Controller
             $photoDetails = [];
             foreach ($request->file('photos') as $index => $photoFile) {
                 $originalFilename = $photoFile->getClientOriginalName();
+                
+                $folderPath = 'paint-job';
+                $path = $photoFile->store($folderPath, 'public');
+
                 $photoDetails[] = $originalFilename;
+                $photoDetails[] = $path;
             }
 
             $pjInfo = Paintjobs::create([

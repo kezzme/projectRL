@@ -58,7 +58,7 @@
         <div class="col-lg-7">
           <div class="bg-primary h-100 d-flex flex-column  p-5 wow zoomIn" data-wow-delay="0.6s">
             <h1 class="text-white mb-4 justify-content-center text-center">Auto Detailing Form</h1>
-            <form action="/services/auto-detailing/check" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <form action="{{ $vehiclesAction }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
               @csrf 
               <div class="row g-3 justify-content-center">
                 <div class="col-12 col-sm-6">
@@ -396,7 +396,6 @@
         // If both fields have values, enable the submit button
         submitButton.disabled = false;
 
-        // You can add further checks or actions here if needed.
 
         return true; // Allow form submission
 }
